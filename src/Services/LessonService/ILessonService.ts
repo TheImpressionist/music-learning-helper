@@ -1,5 +1,7 @@
+import { ILesson } from "./ILesson";
+
 export interface ILessonService {
-  getLesson(name: string): any; // TODO: Add Lesson type
-  listLessons(): IterableIterator<any>;
+  getLesson(name: string): ILesson;
+  listLessons(): IterableIterator<ILesson>;
   listLessonNames(): IterableIterator<string>;
 }

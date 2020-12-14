@@ -1,23 +1,26 @@
 import { ILesson } from "./ILesson";
 
 export class Lesson<T> implements ILesson<T> {
-  private itterator: Generator<T, boolean, T>;
+  private itterator: Generator<T, void, boolean>;
+  private currentStep: IteratorResult<T, void> | null = null;
 
-  constructor(private lessons: Array<T>) {
+  constructor(protected steps: Array<T>) {
     this.itterator = this.makeLessonItterator();
   }
 
-  public getNextStep(): any {}
+  public getNextStep(): T | void {
+    this.currentStep = this.itterator.next();
 
-  public isLastStep(): boolean {
-    return this.itterator.done();
+    return this.currentStep.value;
   }
 
-  private *makeLessonItterator(): Generator<T, boolean, T> {
-    for (const lesson of this.lessons) {
-      yield lesson;
-    }
+  public isLastStep(): boolean {
+    return this.currentStep?.done ?? false;
+  }
 
-    return true;
+  protected *makeLessonItterator(): Generator<T, void, boolean> {
+    for (const step of this.steps) {
+      yield step;
+    }
   }
 }

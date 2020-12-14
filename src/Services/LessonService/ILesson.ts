@@ -1,4 +1,4 @@
-export interface ILesson<T> {
-  getNextStep(): T;
+export interface ILesson<T = unknown> {
+  getNextStep(): T | void;
   isLastStep(): boolean;
 }

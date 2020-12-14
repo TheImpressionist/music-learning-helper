@@ -1,22 +1,23 @@
+import { ILesson } from "./ILesson";
 import { ILessonService } from "./ILessonService";
 import { LessonNotFoundError } from "./LessonNotFoundError";
 
 export class LessonService implements ILessonService {
-  private lessonMap = new Map<string, any>();
+  private lessonMap = new Map<string, ILesson>();
 
-  constructor(lessons: Array<any>) {
+  constructor(lessons: Array<ILesson>) {
     this.prepareLessons(lessons);
   }
 
-  public getLesson(name: string): any {
+  public getLesson(name: string): ILesson {
     if (!this.lessonMap?.has(name)) {
       throw new LessonNotFoundError(name);
     }
 
-    return this.lessonMap.get(name);
+    return this.lessonMap.get(name) as ILesson;
   }
 
-  public listLessons(): IterableIterator<any> {
+  public listLessons(): IterableIterator<ILesson> {
     return this.lessonMap.values();
   }
 
@@ -24,9 +25,9 @@ export class LessonService implements ILessonService {
     return this.lessonMap.keys();
   }
 
-  private prepareLessons(lessons: Array<any>): void {
+  private prepareLessons(lessons: Array<ILesson>): void {
     for (const lesson of lessons) {
-      this.lessonMap.set(lesson.prototype.constructor.name, lesson);
+      this.lessonMap.set(lesson.constructor.name, lesson);
     }
   }
 }
