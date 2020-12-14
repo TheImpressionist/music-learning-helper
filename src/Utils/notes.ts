@@ -1,7 +1,7 @@
 import { INote } from "../types/INote";
 
-export const sharpSymbol = Symbol("♯");
-export const flatSymbol = Symbol("♭");
+export const sharpSymbol = "♯";
+export const flatSymbol = "♭";
 export const notes: Array<INote> = [
   {
     note: "A",

@@ -23,12 +23,12 @@ export class NoteMemorizationLesson extends Lesson<string> {
     const sharps = this.config.sharps
       ? notes
           .filter(({ hasSharp }) => hasSharp)
-          .map(({ note }) => `${sharpSymbol.toString()}${note}`)
+          .map(({ note }) => `${sharpSymbol}${note}`)
       : [];
-    const flats = this.config.sharps
+    const flats = this.config.flats
       ? notes
           .filter(({ hasFlat }) => hasFlat)
-          .map(({ note }) => `${flatSymbol.toString()}${note}`)
+          .map(({ note }) => `${flatSymbol}${note}`)
       : [];
 
     this.steps = shuffle([...natural, ...sharps, ...flats]);
