@@ -58,6 +58,7 @@ describe("NoteMemorizationLesson Custom Config", () => {
 
     while (!lesson.isLastStep()) {
       const note = lesson.getNextStep();
+
       if (note) {
         result.push(note);
       }
